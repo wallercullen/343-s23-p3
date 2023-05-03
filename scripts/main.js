@@ -55,7 +55,7 @@ async function generateCodeChallenge(codeVerifier) {
 }
 
 const clientId = 'ba3168bc03e94f21b9fa1e2678bca0a4';
-const redirectUri = 'https://google.com';
+const redirectUri = 'https://wallercullen.github.io/343-s23-p3/';
 
 let codeVerifier = generateRandomString(128);
 
