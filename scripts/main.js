@@ -73,7 +73,7 @@ function LogInSpotify() {
 }
 
 const spotifyLogin = document.getElementById("spotify-login");
-spotifyLogin.onsubmit = LogInSpotify;
+spotifyLogin.onclick = LogInSpotify;
 
 const searchForm = document.getElementById("top-search");
 searchForm.onsubmit = (ev) => {
