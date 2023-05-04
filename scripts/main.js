@@ -92,43 +92,40 @@ searchForm.onsubmit = (ev) => {
         is_day = weatherResults['current']['is_day'];
         console.log(weather);
         console.log(is_day ? "day" : "night")
-    });
+        const urlParams = new URLSearchParams(window.location.search);
+        let code = urlParams.get('code');
+        let codeVerifier = localStorage.getItem('code_verifier');
 
+        let body = new URLSearchParams({
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: redirectUri,
+            client_id: clientId,
+            code_verifier: codeVerifier
+        });
 
-    const urlParams = new URLSearchParams(window.location.search);
-    let code = urlParams.get('code');
-    let codeVerifier = localStorage.getItem('code_verifier');
-
-    let body = new URLSearchParams({
-        grant_type: 'authorization_code',
-        code: code,
-        redirect_uri: redirectUri,
-        client_id: clientId,
-        code_verifier: codeVerifier
-    });
-
-    const response = fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: body
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('HTTP status ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        localStorage.setItem('access_token', data.access_token);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-    let query = weather + "%20" + is_day ? "day" : "night";
-    searchPlaylist(query).then(data => {
-        console.log(data);
+        const response = fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('HTTP status ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('access_token', data.access_token);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        let query = weather + "%20" + is_day ? "day" : "night";
+        searchPlaylist(query).then(data => {
+            console.log(data);
+        });
     });
 };
