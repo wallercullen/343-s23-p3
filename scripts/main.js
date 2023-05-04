@@ -18,7 +18,6 @@ let body = new URLSearchParams({
 });
 
 if (code) {
-    spotifyLogin.style.display = "none";
     const response = fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -39,8 +38,6 @@ if (code) {
         .catch(error => {
             console.error('Error:', error);
         });
-} else {
-    spotifyLogin.style.display = "block";
 }
 
 
