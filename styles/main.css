@@ -1,3 +1,11 @@
+* {
+    color: rgb(215, 214, 214) !important;
+}
+
+body {
+    background-color: #100021;
+}
+
 .card {
     height: 85%;
     width: 65%;
@@ -45,6 +53,7 @@ h5 {
 }
 
 nav {
+    background-color: #00726e;
     display: flex;
     justify-content: space-between;
 }
