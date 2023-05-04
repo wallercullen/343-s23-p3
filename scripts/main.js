@@ -124,6 +124,7 @@ searchForm.onsubmit = (ev) => {
             console.error('Error:', error);
         });
         let query = weather + "%20" + is_day ? "day" : "night";
+        console.log(query);
         searchPlaylist(query).then(data => {
             console.log(data);
         });
