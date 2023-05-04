@@ -3,6 +3,66 @@ const clientId = 'ba3168bc03e94f21b9fa1e2678bca0a4';
 const redirectUri = 'https://wallercullen.github.io/343-s23-p3/';
 
 
+document.onload(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let code = urlParams.get('code');
+    let codeVerifier = localStorage.getItem('code_verifier');
+
+    let body = new URLSearchParams({
+        grant_type: 'authorization_code',
+        code: code,
+        redirect_uri: redirectUri,
+        client_id: clientId,
+        code_verifier: codeVerifier
+    });
+
+    const response = fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('HTTP status ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+    })
+    .catch(error => {
+        if (error.satus == 401){
+            const newResponse = fetch('https://acounts.spotify.com/api/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'applicatoin/x-www-form-urlencoded'
+                },
+                body: {
+                    grant_type: 'refresh_token',
+                    refresh_token: localStorage.getItem('refresh_token'),
+                    client_id: clientId
+                }
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP status ' + response.status);
+                }
+                return response.json();
+            }).then(data => {
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+            }).catch(error => {
+                console.error('Error:', error);
+            })
+        } else {
+            console.error('Error:', error);
+        }
+    });
+});
+
+
 const getWeather = (word) => {
     console.log("attempting to get weather for", word);
     return fetch(
@@ -92,37 +152,7 @@ searchForm.onsubmit = (ev) => {
         time = weatherResults['current']['is_day'] ? "day" : "night";
         console.log(weather);
         console.log(time);
-        const urlParams = new URLSearchParams(window.location.search);
-        let code = urlParams.get('code');
-        let codeVerifier = localStorage.getItem('code_verifier');
-
-        let body = new URLSearchParams({
-            grant_type: 'authorization_code',
-            code: code,
-            redirect_uri: redirectUri,
-            client_id: clientId,
-            code_verifier: codeVerifier
-        });
-
-        const response = fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: body
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('HTTP status ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            localStorage.setItem('access_token', data.access_token);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        
         let query = weather + " " + time;
         console.log(query);
         searchPlaylist(query).then(data => {
