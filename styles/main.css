@@ -1,19 +1,18 @@
-* {
-    color: rgb(215, 214, 214) !important;
-}
 
 body {
+    color: rgb(215, 214, 214) !important;
     background-color: #100021;
 }
 
 .card {
-    height: 85%;
+
+    height: 40vh;
     width: 65%;
     margin: 1vh;
 }
 
 .background {
-    height: 65%;
+    height: 30vh;
     width: 100%;
 }
 
@@ -26,12 +25,17 @@ body {
     display: flex;
 }
 
+.btn {
+    color: rgb(215, 214, 214) !important;
+}
+
 .lead {
     margin: 10%;
     width: 100%;
 }
 
 #Title {
+    color: rgb(215, 214, 214) !important;
     font-size: large;
 }
 
