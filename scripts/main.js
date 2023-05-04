@@ -140,17 +140,22 @@ const playlistToDOM = (playlist) => {
     const container = document.createElement('div');
     container.classList.add('card');
 
+    const head = document.createElement('div');
+    head.classList.add('background')
+    head.style = `background-image: url('${playlist.images[0].url}'));`;
+
     const body = document.createElement('div');
     body.classList.add('card-body');
+
+    //const image = document.createElement('img');
+    //image.src = playlist.images[0].url
+    //body.appendChild(image);
 
     const name = document.createElement('h4');
     name.textContent = playlist.name;
     body.appendChild(name);
 
-    const image = document.createElement('img');
-    image.src = playlist.images[0].url
-    body.appendChild(image);
-
-    container.appendChild(body)
+    container.appendChild(head);
+    container.appendChild(body);
     return container;
 };
