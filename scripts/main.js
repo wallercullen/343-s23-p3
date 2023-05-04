@@ -84,12 +84,12 @@ searchForm.onsubmit = (ev) => {
     console.log("queryText", queryText);
 
     let weather = "";
-    let is_day = false;
+    let time = "";
     const weatherResultsPromise = getWeather(queryText);
     weatherResultsPromise.then((weatherResults) => {
         console.log(weatherResults);
         weather = weatherResults['current']['condition']['text']
-        is_day = weatherResults['current']['is_day'];
+        time = weatherResults['current']['is_day'] ? "day" : "night";
         console.log(weather);
         console.log(is_day ? "day" : "night")
         const urlParams = new URLSearchParams(window.location.search);
@@ -123,7 +123,7 @@ searchForm.onsubmit = (ev) => {
         .catch(error => {
             console.error('Error:', error);
         });
-        let query = weather + " " + is_day ? "day" : "night";
+        let query = weather + " " + time;
         console.log(query);
         searchPlaylist(query).then(data => {
             console.log(data);
