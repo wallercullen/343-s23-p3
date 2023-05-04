@@ -151,6 +151,8 @@ const playlistToDOM = (playlist) => {
 
     const anchor = document.createElement('a');
     anchor.href = playlist.external_urls.spotify;
+    anchor.target = '_blank';
+    anchor.classList.add('link-opacity-25-hover');
 
     const head = document.createElement('div');
     head.classList.add('background')

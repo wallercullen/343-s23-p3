@@ -1,17 +1,17 @@
 .card {
-    height: 40vh;
-    width: 20vw;
+    height: 30vh;
+    width: 40%;
     margin: 1vh;
 }
 
 .background {
-    height: 30vh;
-    width: 20vw;
+    height: 70%;
+    width: 100%;
 }
 
 img {
-    width: 20vw;
-    height: 30vh;
+    width: 100%;
+    height: 100%;
 }
 
 .card-body {
@@ -24,4 +24,24 @@ h5 {
     white-space: nowrap;
     display: block;
     width: 100%;
+}
+
+section {
+    margin-left: 10%;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media screen and (min-width: 500px) {
+    section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .card {
+        height: 40vh; 
+        width: 70%;
+    }
 }
