@@ -3,7 +3,7 @@ const clientId = 'ba3168bc03e94f21b9fa1e2678bca0a4';
 const redirectUri = 'https://wallercullen.github.io/343-s23-p3/';
 
 
-document.onload(function() {
+document.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get('code');
     let codeVerifier = localStorage.getItem('code_verifier');
@@ -60,7 +60,7 @@ document.onload(function() {
             console.error('Error:', error);
         }
     });
-});
+};
 
 
 const getWeather = (word) => {
