@@ -91,7 +91,7 @@ searchForm.onsubmit = (ev) => {
         weather = weatherResults['current']['condition']['text']
         time = weatherResults['current']['is_day'] ? "day" : "night";
         console.log(weather);
-        console.log(is_day ? "day" : "night")
+        console.log(time);
         const urlParams = new URLSearchParams(window.location.search);
         let code = urlParams.get('code');
         let codeVerifier = localStorage.getItem('code_verifier');
