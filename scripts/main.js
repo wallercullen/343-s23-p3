@@ -150,7 +150,7 @@ const playlistToDOM = (playlist) => {
     container.classList.add('card');
 
     const anchor = document.createElement('a');
-    container.href = playlist.externalurls.spotify;
+    container.href = playlist.external_urls.spotify;
 
     const head = document.createElement('div');
     head.classList.add('background')
