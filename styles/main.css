@@ -2,6 +2,8 @@
 body {
     color: rgb(215, 214, 214) !important;
     background-color: #100021;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .card {
