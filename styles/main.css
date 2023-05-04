@@ -13,3 +13,15 @@ img {
     width: 20vw;
     height: 30vh;
 }
+
+.card-body {
+    width: 99%;
+}
+
+h5 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+}
