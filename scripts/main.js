@@ -127,7 +127,7 @@ searchForm.onsubmit = (ev) => {
         console.log(query);
         searchPlaylist(query).then(data => {
             console.log(data);
-            const playlistCards = data.items.map(playlistToDOM);
+            const playlistCards = data.playlists.items.map(playlistToDOM);
             const playlistResults = document.getElementById('PlaylistResults');
             playlistCards.forEach(playlist => {
                 playlistResults.appendChild(playlist);
