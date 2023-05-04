@@ -162,8 +162,12 @@ searchForm.onsubmit = (ev) => {
 };
 
 const playlistToDOM = (playlist) => {
+
     const container = document.createElement('div');
     container.classList.add('card');
+
+    const anchor = document.createElement('a');
+    container.href = playlist.externalurls.spotify;
 
     const head = document.createElement('div');
     head.classList.add('background')
@@ -181,5 +185,6 @@ const playlistToDOM = (playlist) => {
 
     container.appendChild(head);
     container.appendChild(body);
-    return container;
+    anchor.appendChild(container);
+    return anchor;
 };
