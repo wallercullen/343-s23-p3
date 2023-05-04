@@ -150,7 +150,7 @@ const playlistToDOM = (playlist) => {
     const body = document.createElement('div');
     body.classList.add('card-body');
 
-    const name = document.createElement('h4');
+    const name = document.createElement('h5');
     name.textContent = playlist.name;
     body.appendChild(name);
 

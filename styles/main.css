@@ -1,8 +1,15 @@
 .card {
-    height: 35vh;
+    height: 40vh;
     width: 20vw;
+    margin: 1vh;
 }
 
 .background {
+    height: 30vh;
+    width: 20vw;
+}
+
+img {
+    width: 20vw;
     height: 30vh;
 }
