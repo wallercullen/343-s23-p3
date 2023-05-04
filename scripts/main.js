@@ -2,6 +2,9 @@ const weatherAPIKey = "afa769abcb584e5080a195837230305";
 const clientId = 'ba3168bc03e94f21b9fa1e2678bca0a4';
 const redirectUri = 'https://wallercullen.github.io/343-s23-p3/';
 
+const spotifyLogin = document.getElementById("spotify-login");
+spotifyLogin.onclick = LogInSpotify;
+
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
 let codeVerifier = localStorage.getItem('code_verifier');
@@ -14,48 +17,31 @@ let body = new URLSearchParams({
     code_verifier: codeVerifier
 });
 
-const newResponse = fetch('https://acounts.spotify.com/api/token', {
+if (code) {
+    spotifyLogin.style.display = "none";
+    const response = fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
-            'Content-Type': 'applicatoin/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: {
-            grant_type: 'refresh_token',
-            refresh_token: localStorage.getItem('refresh_token'),
-            client_id: clientId
-        }
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error('HTTP status ' + response.status);
-        }
-        return response.json();
-    }).then(data => {
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
-    }).catch(error => {
-        console.error('Error:', error);
-    });
-
-const response = fetch('https://accounts.spotify.com/api/token', {
-method: 'POST',
-headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-},
-body: body
-})
-.then(response => {
-    if (!response.ok) {
-        throw new Error('HTTP status ' + response.status);
-    }
-    return response.json();
-})
-.then(data => {
-    localStorage.setItem('access_token', data.access_token);
-    localStorage.setItem('refresh_token', data.refresh_token);
-})
-.catch(error => {
-    console.error('Error:', error);
-});
+        body: body
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('HTTP status ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem('refresh_token', data.refresh_token);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+} else {
+    spotifyLogin.style.display = "block";
+}
 
 
 const getWeather = (word) => {
@@ -125,9 +111,6 @@ function LogInSpotify() {
         window.location = 'https://accounts.spotify.com/authorize?' + args;
     });
 }
-
-const spotifyLogin = document.getElementById("spotify-login");
-spotifyLogin.onclick = LogInSpotify;
 
 const searchForm = document.getElementById("top-search");
 searchForm.onsubmit = (ev) => {
