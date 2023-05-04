@@ -142,7 +142,7 @@ const playlistToDOM = (playlist) => {
 
     const head = document.createElement('div');
     head.classList.add('background')
-    head.style = `background-image: url('${playlist.images[0].url}'));`;
+    head.style.backgroundImage = `url('${playlist.images[0].url}');`;
 
     const body = document.createElement('div');
     body.classList.add('card-body');
