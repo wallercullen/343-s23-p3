@@ -127,6 +127,30 @@ searchForm.onsubmit = (ev) => {
         console.log(query);
         searchPlaylist(query).then(data => {
             console.log(data);
+            const playlistCards = data.items.map(playlistToDOM);
+            const playlistResults = document.getElementById('PlaylistResults');
+            playlistCards.forEach(playlist => {
+                playlistResults.appendChild(playlist);
+            });
         });
     });
+};
+
+const playlistToDOM = (playlist) => {
+    const container = document.createElement('div');
+    container.classList.add('card');
+
+    const body = document.createElement('div');
+    body.classList.add('card-body');
+
+    const name = document.createElement('h4');
+    name.textContent = playlist.name;
+    body.appendChild(name);
+
+    const image = document.createElement('img');
+    image.src = playlist.images[0].url
+    body.appendChild(image);
+
+    container.appendChild(body)
+    return container;
 };
